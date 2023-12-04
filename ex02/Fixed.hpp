@@ -14,11 +14,10 @@ class Fixed {
         Fixed( const float value );
         ~Fixed( void );
 
-        static Fixed min(Fixed& v1, Fixed& v2);
-        static Fixed max(Fixed& v1, Fixed& v2);
-
-        static Fixed min(const Fixed& v1, const Fixed& v2);
-        static Fixed max(const Fixed& v1, const Fixed& v2);
+        static Fixed& min(Fixed& v1, Fixed& v2);
+        static Fixed& max(Fixed& v1, Fixed& v2);
+        static const Fixed& min(const Fixed& v1, const Fixed& v2);
+        static const Fixed& max(const Fixed& v1, const Fixed& v2);
 
         Fixed&	operator=(const Fixed& rhs);
 		Fixed	operator+(const Fixed& rhs) const;
@@ -33,10 +32,10 @@ class Fixed {
 		bool	operator==(const Fixed& rhs) const;
 		bool	operator!=(const Fixed& rhs) const;
 
-        Fixed	operator++();
-        Fixed	operator++(int rhs);
-        Fixed	operator--();
-        Fixed	operator--(int rhs);
+        Fixed&	operator++( void );
+        Fixed	operator++( int );
+        Fixed&	operator--( void );
+        Fixed	operator--( int );
 
         int		getRawBits( void ) const;
         void	setRawBits( int const raw );
