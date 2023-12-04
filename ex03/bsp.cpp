@@ -1,24 +1,27 @@
 #include "Point.hpp"
 
-/* True si le point est à l’intérieur du triangle. False dans le cas contraire */
+float ft_abs(const float f) {
+
+    return (f < 0 ? -f : f);
+}
+
 bool bsp( Point const a, Point const b, Point const c, Point const point) {
 
-    float Alpha, Beta, Gamma, DetT;
-    //mettre en float les point
-    float Ax = a.getX().getRawBits() >> 8;
-    float Ay = a.getY().getRawBits() >> 8;
-    float Bx = b.getX().getRawBits() >> 8;
-    float By = b.getY().getRawBits() >> 8;
-    float Cx = c.getX().getRawBits() >> 8;
-    float Cy = c.getY().getRawBits() >> 8;
+    float Alpha, Beta, Gamma, total;
 
-    float Px = point.getX().getRawBits() >> 8;
-    float Py = point.getY().getRawBits() >> 8;
+    float Ax = a.getX().toFloat();
+    float Ay = a.getY().toFloat();
+    float Bx = b.getX().toFloat();
+    float By = b.getY().toFloat();
+    float Cx = c.getX().toFloat();
+    float Cy = c.getY().toFloat();
+    float Px = point.getX().toFloat();
+    float Py = point.getY().toFloat();
 
-    DetT = (By - Cy) * (Ax - Cx) + (Cx - Bx) * (Ay - Cy);
-    Alpha = ((By - Cy) * (Px - Cx) + (Cx - Bx) * (Py - Cy)) / DetT;
-    Beta = ((Cy - Ay) * (Px - Cx) + (Ax - Cx) * (Py - Cy)) / DetT;
-    Gamma = 1.0f - Alpha - Beta;
+    Alpha = 0.5 * ft_abs(Ax * (Py - By) + Px * (By - Ay) + Bx * (Ay - Py));
+    Beta = 0.5 * ft_abs(Bx * (Py - Cy) + Px * (Cy - By) + Cx * (By - Py));
+    Gamma = 0.5 * ft_abs(Cx * (Py - Ay) + Px * (Ay - Cy) + Ax * (Cy - Py));
+    total = 0.5 * ft_abs(Ax * (By - Cy) + Bx * (Cy - Ay) + Cx * (Ay - By));
 
-    return (Alpha >= 0.0f && Beta >= 0.0f && Gamma > 0.0f && Alpha <= 1.0f && Beta <= 1.0f && Gamma <= 1.0f);
+    return ((Alpha + Beta + Gamma) == total && Alpha != 0 && Beta != 0 && Gamma != 0);
 }
