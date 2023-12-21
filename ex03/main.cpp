@@ -9,11 +9,10 @@ bool bsp( Point const a, Point const b, Point const c, Point const point );
 
 void display_sol(Point const a, Point const b, Point const c, Point const point ) {
 
-    std::cout << "The point with coordinates (" << point.getX().toFloat() << "," << point.getY().toFloat() << ") ";
     if (bsp(a, b, c, point))
-        std::cout << "is " << GREEN << "in" << RESET_COLOR << " the rectangle with coordinates :" << std::endl;
+        std::cout << "The point is " << GREEN << "in" << RESET_COLOR << " the rectangle with coordinates :" << std::endl;
     else
-        std::cout << "is " << RED << "out" << RESET_COLOR << " of the rectangle with coordinates :" << std::endl;
+        std::cout << "The point is " << RED << "out" << RESET_COLOR << " of the rectangle with coordinates :" << std::endl;
     std::cout << "  A(" << a.getX().toFloat() << "," << a.getY().toFloat() << ")" << std::endl;
     std::cout << "  B(" << b.getX().toFloat() << "," << b.getY().toFloat() << ")" << std::endl;
     std::cout << "  C(" << c.getX().toFloat() << "," << c.getY().toFloat() << ")" << std::endl;
@@ -41,7 +40,7 @@ int main()
     Point c4(1.5, 0);
     display_sol(a4, b4, c4, point4);
     // 5 - tout juste a l'interieur
-    Point point5(2, -0.0001);
+    Point point5(2.0f, -0.01f);
     Point a5(0, -1);
     Point b5(0, 2);
     Point c5(3, -1);

@@ -152,6 +152,8 @@ Fixed   Fixed::operator*(const Fixed& rhs) const {
 
 Fixed   Fixed::operator/(const Fixed& rhs) const {
 
+    if (this->toFloat() == 0 || rhs.toFloat() == 0)
+        return (Fixed(0));
     return Fixed(this->toFloat() / rhs.toFloat());
 }
 
